@@ -1,0 +1,4 @@
+FROM maven:3.6.3-openjdk-11
+
+ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
+CMD ["mvn"]
