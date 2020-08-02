@@ -5,11 +5,9 @@ phases:
     commands:
       - echo Logging in to Amazon ECR
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-#      - docker build -f DockerfileMaven -t maven-build .
   build:
     commands:
       - echo Build started
-#      - docker container run -it -v $(pwd):/root maven:3.6.3-openjdk-11 mvn clean package -f /root/pom.xml
       - mvn clean install
       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG .
   post_build:
