@@ -8,10 +8,11 @@ phases:
     commands:
       - echo Logging in to Amazon ECR
 #      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo "${CODEBUILD_BUILD_NUMBER}-${CODEBUILD_WEBHOOK_TRIGGER}-SNAPSHOT" | sed 's/pr\///' -
+      - export TAG=$(echo "${CODEBUILD_BUILD_NUMBER}-${CODEBUILD_WEBHOOK_TRIGGER}-SNAPSHOT" | sed 's/pr\///' -)
   build:
     commands:
       - echo Build started
+      - echo "TAG => $TAG"
 #      - mvn clean install
 #      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG .
   post_build:
